@@ -1,0 +1,9 @@
+{
+  "description": "Appartement spacieux avec vue sur l'ESGI",
+  "address": "77 Rue des roses",
+  "town": "Paris",
+  "propertyType": "Appartement",
+  "rentAmount": 750.9,
+  "securityDepositAmount": 1200.9,
+  "area": 37.48
+}
