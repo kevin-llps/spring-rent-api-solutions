@@ -6,6 +6,7 @@ import fr.esgi.rent.dto.response.RentalPropertyResponseDto;
 import fr.esgi.rent.exception.NotFoundRentalPropertyException;
 import fr.esgi.rent.mapper.RentalPropertyDtoMapper;
 import fr.esgi.rent.repository.RentalPropertyRepository;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class RentalPropertyResource {
 
     @PostMapping("/rental-properties")
     @ResponseStatus(CREATED)
-    public RentalPropertyResponseDto createRentalProperty(@RequestBody RentalPropertyRequestDto rentalPropertyRequestDto) {
+    public RentalPropertyResponseDto createRentalProperty(@Valid @RequestBody RentalPropertyRequestDto rentalPropertyRequestDto) {
         RentalPropertyEntity rentalPropertyEntity = rentalPropertyDtoMapper.mapToEntity(rentalPropertyRequestDto);
 
         RentalPropertyEntity savedRentalProperty = rentalPropertyRepository.save(rentalPropertyEntity);

@@ -2,23 +2,25 @@ package fr.esgi.rent.dto.request;
 
 import lombok.Builder;
 
+import jakarta.validation.constraints.NotNull;
+
 @Builder
 public record RentalPropertyRequestDto(
-        String description,
-        String town,
-        String address,
-        String propertyType,
-        double rentAmount,
-        double securityDepositAmount,
-        double area,
-        int bedroomsCount,
+        @NotNull String description,
+        @NotNull String town,
+        @NotNull String address,
+        @NotNull String propertyType,
+        @NotNull double rentAmount,
+        @NotNull double securityDepositAmount,
+        @NotNull double area,
+        @NotNull int bedroomsCount,
         int floorNumber,
         int numberOfFloors,
-        int constructionYear,
-        String energyClassification,
-        boolean hasElevator,
-        boolean hasIntercom,
-        boolean hasBalcony,
-        boolean hasParkingSpace) {
+        @NotNull int constructionYear,
+        @NotNull String energyClassification,
+        @NotNull boolean hasElevator,
+        @NotNull boolean hasIntercom,
+        @NotNull boolean hasBalcony,
+        @NotNull boolean hasParkingSpace) {
 
 }

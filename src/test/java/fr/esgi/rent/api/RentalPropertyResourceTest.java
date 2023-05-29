@@ -40,6 +40,9 @@ class RentalPropertyResourceTest {
     @Value("classpath:/json/rentalPropertyRequest.json")
     private Resource rentalPropertyRequest;
 
+    @Value("classpath:/json/invalidRentalPropertyRequest.json")
+    private Resource invalidRentalPropertyRequest;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -122,6 +125,17 @@ class RentalPropertyResourceTest {
         verify(rentalPropertyRepository).save(rentalPropertyEntity);
         verify(rentalPropertyDtoMapper).mapToDto(rentalPropertyEntity);
         verifyNoMoreInteractions(rentalPropertyDtoMapper, rentalPropertyRepository);
+    }
+
+    @Test
+    void givenInvalidRequestBody_shouldReturn404HttpStatusCode() throws Exception {
+        mockMvc.perform(post("/api/rental-properties")
+                        .contentType(APPLICATION_JSON_VALUE)
+                        .content(readResource(invalidRentalPropertyRequest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json("{\"message\": \"La requête envoyée est invalide\"}"));
+
+        verifyNoInteractions(rentalPropertyDtoMapper, rentalPropertyRepository);
     }
 
 }

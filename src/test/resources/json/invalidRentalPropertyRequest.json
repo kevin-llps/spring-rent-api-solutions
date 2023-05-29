@@ -1,0 +1,12 @@
+{
+  "description": "Appartement spacieux avec vue sur l'ESGI",
+  "bedroomsCount": 2,
+  "floorNumber": 1,
+  "numberOfFloors": 3,
+  "constructionYear": 1990,
+  "energyClassification": "B",
+  "hasElevator": false,
+  "hasIntercom": false,
+  "hasBalcony": true,
+  "hasParkingSpace": false
+}

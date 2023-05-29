@@ -18,4 +18,15 @@ class ErrorHandlerTest {
         assertThat(errorDto.message()).isEqualTo(message);
     }
 
+    @Test
+    void shouldHandleMethodArgumentNotValidException() {
+        String message = "La requête envoyée est invalide";
+
+        ErrorHandler errorHandler = new ErrorHandler();
+
+        ErrorDto errorDto = errorHandler.handleMethodArgumentNotValidException();
+
+        assertThat(errorDto.message()).isEqualTo(message);
+    }
+
 }
