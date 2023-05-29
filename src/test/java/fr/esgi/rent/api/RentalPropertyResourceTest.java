@@ -1,6 +1,7 @@
 package fr.esgi.rent.api;
 
 import fr.esgi.rent.domain.RentalPropertyEntity;
+import fr.esgi.rent.dto.request.RentalPropertyRequestDto;
 import fr.esgi.rent.dto.response.RentalPropertyResponseDto;
 import fr.esgi.rent.mapper.RentalPropertyDtoMapper;
 import fr.esgi.rent.repository.RentalPropertyRepository;
@@ -16,14 +17,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static fr.esgi.rent.samples.RentalPropertyDtoSample.oneRentalPropertyResponse;
-import static fr.esgi.rent.samples.RentalPropertyDtoSample.rentalPropertyResponseList;
+import static fr.esgi.rent.samples.RentalPropertyDtoSample.*;
 import static fr.esgi.rent.samples.RentalPropertyEntitySample.oneRentalPropertyEntity;
 import static fr.esgi.rent.samples.RentalPropertyEntitySample.rentalPropertyEntities;
 import static fr.esgi.rent.utils.TestUtils.readResource;
 import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -35,6 +36,9 @@ class RentalPropertyResourceTest {
 
     @Value("classpath:/json/rentalProperty.json")
     private Resource rentalProperty;
+
+    @Value("classpath:/json/rentalPropertyRequest.json")
+    private Resource rentalPropertyRequest;
 
     @Autowired
     private MockMvc mockMvc;
@@ -96,6 +100,28 @@ class RentalPropertyResourceTest {
         verify(rentalPropertyRepository).findById(UUID.fromString(id));
         verifyNoInteractions(rentalPropertyDtoMapper);
         verifyNoMoreInteractions(rentalPropertyRepository);
+    }
+
+    @Test
+    void shouldCreateRentalProperty() throws Exception {
+        RentalPropertyRequestDto rentalPropertyRequestDto = oneRentalPropertyRequest();
+        RentalPropertyResponseDto rentalPropertyResponseDto = oneRentalPropertyResponse();
+        RentalPropertyEntity rentalPropertyEntity = oneRentalPropertyEntity();
+
+        when(rentalPropertyDtoMapper.mapToEntity(rentalPropertyRequestDto)).thenReturn(rentalPropertyEntity);
+        when(rentalPropertyRepository.save(rentalPropertyEntity)).thenReturn(rentalPropertyEntity);
+        when(rentalPropertyDtoMapper.mapToDto(rentalPropertyEntity)).thenReturn(rentalPropertyResponseDto);
+
+        mockMvc.perform(post("/api/rental-properties")
+                        .contentType(APPLICATION_JSON_VALUE)
+                        .content(readResource(rentalPropertyRequest)))
+                .andExpect(status().isCreated())
+                .andExpect(content().json(readResource(rentalProperty)));
+
+        verify(rentalPropertyDtoMapper).mapToEntity(rentalPropertyRequestDto);
+        verify(rentalPropertyRepository).save(rentalPropertyEntity);
+        verify(rentalPropertyDtoMapper).mapToDto(rentalPropertyEntity);
+        verifyNoMoreInteractions(rentalPropertyDtoMapper, rentalPropertyRepository);
     }
 
 }
