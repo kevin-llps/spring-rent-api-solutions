@@ -98,6 +98,7 @@ class RentalPropertyResourceTest {
 
         mockMvc.perform(get("/api/rental-properties/{id}", id))
                 .andExpect(status().isNotFound())
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(content().json("{\"message\":\"Le bien immobilier " + id + " est introuvable\"}"));
 
         verify(rentalPropertyRepository).findById(UUID.fromString(id));
@@ -119,6 +120,7 @@ class RentalPropertyResourceTest {
                         .contentType(APPLICATION_JSON_VALUE)
                         .content(readResource(rentalPropertyRequest)))
                 .andExpect(status().isCreated())
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(content().json(readResource(rentalProperty)));
 
         verify(rentalPropertyDtoMapper).mapToEntity(rentalPropertyRequestDto);
@@ -133,6 +135,7 @@ class RentalPropertyResourceTest {
                         .contentType(APPLICATION_JSON_VALUE)
                         .content(readResource(invalidRentalPropertyRequest)))
                 .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(content().json("{\"message\": \"La requête envoyée est invalide\"}"));
 
         verifyNoInteractions(rentalPropertyDtoMapper, rentalPropertyRepository);
