@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.Resource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -18,6 +18,7 @@ import static fr.esgi.rent.samples.RentalPropertyDtoSample.rentalPropertyRespons
 import static fr.esgi.rent.samples.RentalPropertyEntitySample.rentalPropertyEntities;
 import static fr.esgi.rent.utils.TestUtils.readResource;
 import static org.mockito.Mockito.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,10 +32,10 @@ class RentalPropertyResourceTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private RentalPropertyRepository rentalPropertyRepository;
 
-    @MockBean
+    @MockitoBean
     private RentalPropertyDtoMapper rentalPropertyDtoMapper;
 
     @Test
@@ -47,6 +48,7 @@ class RentalPropertyResourceTest {
 
         mockMvc.perform(get("/api/rental-properties"))
                 .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(content().json(readResource(rentalProperties)));
 
         verify(rentalPropertyRepository).findAll();
