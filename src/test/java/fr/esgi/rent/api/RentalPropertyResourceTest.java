@@ -75,6 +75,7 @@ class RentalPropertyResourceTest {
 
         mockMvc.perform(get("/api/rental-properties/{id}", id))
                 .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(content().json(readResource(rentalProperty)));
 
         verify(rentalPropertyRepository).findById(UUID.fromString(id));
