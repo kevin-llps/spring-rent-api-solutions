@@ -11,6 +11,13 @@
     </parent>
 
     <artifactId>spring-rent-api-solutions</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>rent-api</module>
+        <module>velib-stations-api</module>
+    </modules>
+
     <groupId>fr.esgi</groupId>
     <version>1.0-SNAPSHOT</version>
 
