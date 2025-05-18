@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  database:
+  rent_database:
     image: mysql/mysql-server:5.6
     container_name: spring-rent-api-solutions
     expose:
@@ -11,3 +11,15 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_ROOT_HOST: "%"
       MYSQL_DATABASE: "rent"
+
+  velib_stations_database:
+    image: mysql/mysql-server:5.6
+    container_name: spring-velib-stations-api-solutions
+    expose:
+      - "3306"
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: "velib_stations"

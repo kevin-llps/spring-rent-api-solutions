@@ -1,0 +1,84 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-geo-coordinates-1.0.0" author="kevin-llps">
+        <createTable tableName="geo_coordinates">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="lon" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lat" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-velib-station-1.0.1" author="kevin-llps">
+        <createTable tableName="velib_station">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="stationcode" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_installed" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capacity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="num_docks_available" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="num_bikes_available" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mechanical" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ebike" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_renting" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_returning" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="due_date" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="geo_coordinates_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="town_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code_insee_town" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="station_opening_hours" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-fk-velib-station-geo-coordinates-1.0.2" author="kevin-llps">
+        <addForeignKeyConstraint baseColumnNames="geo_coordinates_id"
+                                 baseTableName="velib_station"
+                                 constraintName="fk_velib_station_geo_coordinates"
+                                 referencedColumnNames="id"
+                                 referencedTableName="geo_coordinates"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+
+</databaseChangeLog>

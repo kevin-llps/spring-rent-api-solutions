@@ -1,0 +1,24 @@
+{
+  "stations": [
+    {
+      "stationcode": "12345",
+      "name": "Test Station",
+      "is_installed": "OUI",
+      "capacity": 10,
+      "numdocksavailable": 5,
+      "numbikesavailable": 5,
+      "mechanical": 3,
+      "ebike": 2,
+      "is_renting": "OUI",
+      "is_returning": "OUI",
+      "duedate": "2025-01-01T12:00:00+00:00",
+      "coordonnees_geo": {
+        "lon": 2.5,
+        "lat": 48.8
+      },
+      "nom_commune": "Paris",
+      "code_insee_commune": "75056",
+      "station_opening_hours": null
+    }
+  ]
+}

@@ -54,12 +54,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>${liquibase.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
@@ -100,17 +94,31 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
                 <configuration>
                     <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
-                    <changeLogFile>db/changelog.xml</changeLogFile>
+                    <changeLogFile>rent-api/src/main/resources/db/changelog.xml</changeLogFile>
                     <outputChangeLogFile>${project.basedir}/src/main/resources/liquibase-outputChangeLog.xml
                     </outputChangeLogFile>
                     <url>jdbc:mysql://localhost:3306/rent</url>
+                    <driver>com.mysql.cj.jdbc.Driver</driver>
+                    <username>root</username>
+                    <password>root</password>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+                <configuration>
+                    <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
+                    <changeLogFile>velib-stations-api/src/main/resources/db/changelog.xml</changeLogFile>
+                    <outputChangeLogFile>${project.basedir}/src/main/resources/liquibase-outputChangeLog.xml
+                    </outputChangeLogFile>
+                    <url>jdbc:mysql://localhost:3307/velib_stations</url>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
                     <username>root</username>
                     <password>root</password>

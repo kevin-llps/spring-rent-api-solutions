@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "0bdf698c-443f-48f1-96a4-96578df5b19b",
+		"name": "Velib Stations API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12334328"
+	},
+	"item": [
+		{
+			"name": "Get Velib Stations by Towns",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"towns\": [\"Nogent-sur-Marne\", \"Vincennes\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/stations/velibs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"stations",
+						"velibs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
