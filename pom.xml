@@ -19,8 +19,6 @@
         <liquibase.version>4.18.0</liquibase.version>
         <lombok.version>1.18.38</lombok.version>
         <testcontainers.version>1.17.6</testcontainers.version>
-        <spring-boot-maven-plugin.version>3.4.4</spring-boot-maven-plugin.version>
-        <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
     </properties>
 
     <dependencies>
@@ -74,6 +72,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -81,7 +84,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-maven-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

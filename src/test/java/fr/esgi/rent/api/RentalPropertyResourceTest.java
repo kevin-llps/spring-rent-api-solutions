@@ -130,7 +130,7 @@ class RentalPropertyResourceTest {
     }
 
     @Test
-    void givenInvalidRequestBody_shouldReturn404HttpStatusCode() throws Exception {
+    void givenInvalidRequestBody_shouldReturn400HttpStatusCode() throws Exception {
         mockMvc.perform(post("/api/rental-properties")
                         .contentType(APPLICATION_JSON_VALUE)
                         .content(readResource(invalidRentalPropertyRequest)))
